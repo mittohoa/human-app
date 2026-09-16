@@ -3,18 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Chính sách quyền riêng tư — HUMAN</title>
-<meta name="description" content="Chính sách quyền riêng tư của ứng dụng HUMAN. HUMAN chạy đầy đủ mà không cần tài khoản; dữ liệu chỉ rời khỏi máy bạn khi bạn chủ động tạo tài khoản.">
+<title>HUMAN — biết lúc nào nên im lặng</title>
+<meta name="description" content="HUMAN gợi ý một việc tiếp theo dựa trên nhịp sống thật của bạn, và biết lúc nào nên nói: bạn xong rồi, đặt điện thoại xuống. Không streak, không bảng xếp hạng.">
 <meta name="color-scheme" content="light dark">
+
+<meta property="og:title" content="HUMAN — biết lúc nào nên im lặng">
+<meta property="og:description" content="Một việc tiếp theo, dựa trên nhịp sống thật của bạn. Không streak, không bảng xếp hạng, không nhắc bạn mở ứng dụng.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="shots/icon.png">
+<link rel="apple-touch-icon" href="shots/icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
 
 <style>
-  /* SINH TỰ ĐỘNG từ docs/PRIVACY.md — đừng sửa tay file này.
-     Sửa nội dung ở file gốc rồi chạy: python tool/build_privacy_page.py
-     Bảng màu lấy từ lib/core/theme/human_palette.dart của chính ứng dụng. */
+  /* Bảng màu lấy nguyên từ lib/core/theme/human_palette.dart của chính app. */
   :root {
     --ground: #FBF8F3;
     --surface: #F5F0E8;
@@ -23,8 +28,15 @@
     --text-2: #433E38;
     --muted: #6E675E;
     --accent: #4A6FA5;
+    --work: #4A6FA5;
+    --learn: #C08A2E;
     --move: #5C8C5A;
-    --danger: #B0534A;
+    --play: #D4795B;
+    --rest: #7C7BA8;
+    --love: #B8657A;
+    --give: #4E938F;
+    --sky-a: #CFE0EF;
+    --sky-b: #F6E8D2;
     --body: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, sans-serif;
   }
 
@@ -37,8 +49,15 @@
       --text-2: #C6C2BC;
       --muted: #8D8A85;
       --accent: #7E9DCB;
+      --work: #7E9DCB;
+      --learn: #DCB05E;
       --move: #88B385;
-      --danger: #D48178;
+      --play: #E79C80;
+      --rest: #A3A2CB;
+      --love: #D68FA1;
+      --give: #79BBB6;
+      --sky-a: #2B3040;
+      --sky-b: #3A3B46;
     }
   }
 
@@ -58,239 +77,326 @@
   .stripe { display: grid; grid-template-columns: repeat(7, 1fr); height: 3px; }
   .stripe span { display: block; }
 
-  main {
-    max-width: 44rem;
+  .wrap {
+    max-width: 58rem;
     margin-inline: auto;
-    padding-inline: clamp(20px, 5vw, 40px);
-    padding-block: clamp(32px, 7vw, 64px) 64px;
+    padding-inline: clamp(20px, 5vw, 44px);
+  }
+
+  /* ── Mở đầu ─────────────────────────────────────────── */
+  .hero {
+    padding-block: clamp(40px, 8vw, 80px) clamp(36px, 6vw, 56px);
+    display: grid;
+    gap: clamp(28px, 5vw, 48px);
+    align-items: center;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 820px) {
+    .hero { grid-template-columns: 1fr 18rem; }
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .brand img { width: 44px; height: 44px; border-radius: 10px; display: block; }
+  .brand b {
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
   }
 
   h1 {
-    font-size: clamp(1.7rem, 5.5vw, 2.3rem);
-    line-height: 1.2;
-    letter-spacing: -0.025em;
+    font-size: clamp(2rem, 6.5vw, 3.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+
+  .lede {
+    font-size: clamp(1.05rem, 2.6vw, 1.22rem);
+    color: var(--text-2);
+    margin: 0 0 30px;
+    max-width: 34rem;
+  }
+
+  .hero-shot {
+    margin: 0;
+    justify-self: center;
+    max-width: 18rem;
+    width: 100%;
+  }
+  .hero-shot img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+  }
+
+  /* ── Nút tải ────────────────────────────────────────── */
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
+
+  .btn {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    min-height: 56px;
+  }
+  .btn b { font-weight: 600; font-size: 0.98rem; line-height: 1.3; }
+  .btn span { font-size: 0.78rem; opacity: 0.8; line-height: 1.3; }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--ground);
+  }
+  .btn-primary b, .btn-primary span { color: var(--ground); }
+
+  .btn-ghost {
+    border-color: var(--line);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .btn-ghost b { color: var(--text); }
+  .btn-ghost span { color: var(--muted); }
+
+  /* Play chưa có thật — nút phải nói thật, không giả vờ bấm được. */
+  .btn-soon {
+    border: 1px dashed var(--line);
+    background: transparent;
+    color: var(--muted);
+    cursor: default;
+  }
+  .btn-soon b { color: var(--text-2); }
+  .btn-soon span { color: var(--muted); }
+
+  .note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 16px 0 0;
+    max-width: 34rem;
+  }
+
+  /* ── Phần nội dung ──────────────────────────────────── */
+  section { padding-block: clamp(36px, 6vw, 60px); border-top: 1px solid var(--line); }
+
+  h2 {
+    font-size: clamp(1.25rem, 3.4vw, 1.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
     font-weight: 700;
     margin: 0 0 8px;
     text-wrap: balance;
   }
+  .sub { color: var(--muted); margin: 0 0 28px; font-size: 0.95rem; max-width: 40rem; }
 
-  .updated { color: var(--muted); font-size: 0.9rem; margin: 0 0 36px; }
-
-  h2 {
-    font-size: clamp(1.15rem, 3.6vw, 1.35rem);
-    line-height: 1.3;
-    letter-spacing: -0.015em;
-    font-weight: 600;
-    margin: 44px 0 12px;
-    padding-top: 28px;
-    border-top: 1px solid var(--line);
-    text-wrap: balance;
-  }
-
-  h3 { font-size: 1rem; font-weight: 600; margin: 26px 0 8px; color: var(--text); }
-
-  p { margin: 0 0 14px; color: var(--text-2); }
-  ul, ol { margin: 0 0 14px; padding-left: 1.3em; color: var(--text-2); }
-  li { margin-bottom: 6px; }
-  strong { color: var(--text); font-weight: 600; }
-  code {
-    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
-    font-size: 0.9em;
-    color: var(--text);
-  }
-
-  /* Tóm tắt — thứ người dùng đọc khi bấm link từ màn hình xin quyền. */
-  .summary {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: clamp(18px, 4vw, 26px);
-    margin: 0 0 8px;
-  }
-  .summary > :last-child { margin-bottom: 0; }
-  .summary li:last-child { margin-bottom: 0; }
-
-  .never { border-left: 3px solid var(--danger); padding-left: 16px; margin: 18px 0; }
-  .only-if { border-left: 3px solid var(--move); padding-left: 16px; margin: 18px 0; }
-  .never > :last-child, .only-if > :last-child { margin-bottom: 0; }
-
-  .table-wrap { overflow-x: auto; margin: 0 0 16px; }
-  table { border-collapse: collapse; width: 100%; min-width: 30rem; font-size: 0.93rem; }
-  th, td {
-    text-align: left;
-    vertical-align: top;
-    padding: 10px 14px 10px 0;
+  .nots { display: grid; gap: 0; }
+  .not {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: 14px;
+    padding-block: 15px;
     border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  .not:first-child { border-top: 1px solid var(--line); }
+  .not .x { color: var(--play); font-weight: 600; line-height: 1.55; }
+  .not p { margin: 0; color: var(--text-2); }
+  .not strong { color: var(--text); font-weight: 600; }
+
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 24px;
+  }
+  figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  figure img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+  }
+  figcaption { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+  figcaption b { display: block; color: var(--text-2); font-weight: 600; }
+
+  .pillars { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.88rem;
     color: var(--text-2);
   }
-  th { color: var(--text); font-weight: 600; white-space: nowrap; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
 
   footer {
-    margin-top: 52px;
-    padding-top: 26px;
     border-top: 1px solid var(--line);
+    padding-block: 30px 44px;
     color: var(--muted);
     font-size: 0.88rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    align-items: center;
   }
-  footer p { color: var(--muted); }
+  footer a { color: var(--accent); }
 
-  a { color: var(--accent); }
-  a:focus-visible, :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  code {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 0.88em;
+  }
+
+  a:focus-visible, :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 </style>
 </head>
 <body>
 
 <div class="stripe" aria-hidden="true">
-  <span style="background:#4A6FA5"></span>
-  <span style="background:#C08A2E"></span>
-  <span style="background:#5C8C5A"></span>
-  <span style="background:#D4795B"></span>
-  <span style="background:#7C7BA8"></span>
-  <span style="background:#B8657A"></span>
-  <span style="background:#4E938F"></span>
+  <span style="background:var(--work)"></span>
+  <span style="background:var(--learn)"></span>
+  <span style="background:var(--move)"></span>
+  <span style="background:var(--play)"></span>
+  <span style="background:var(--rest)"></span>
+  <span style="background:var(--love)"></span>
+  <span style="background:var(--give)"></span>
 </div>
 
-<main>
+<div class="wrap">
 
-  <h1>Chính sách quyền riêng tư — HUMAN</h1>
-  <p class="updated">Cập nhật lần cuối: 16/09/2026</p>
-  <h2>Tóm tắt trong năm dòng</h2>
-  <div class="summary">
-  <ol>
-    <li>HUMAN chạy được đầy đủ <strong>mà không cần tài khoản</strong>. Khi đó dữ liệu chỉ nằm trên máy bạn và không đi đâu cả.</li>
-    <li>Chỉ khi bạn <strong>chủ động tạo tài khoản</strong>, dữ liệu mới được sao lưu lên máy chủ để đồng bộ giữa các thiết bị của chính bạn.</li>
-    <li>HUMAN <strong>không bán</strong> dữ liệu, <strong>không chia sẻ</strong> cho bên quảng cáo, và không có quảng cáo trong ứng dụng.</li>
-    <li>HUMAN <strong>không</strong> xin quyền vị trí, danh bạ, camera, micro hay lịch sử duyệt web.</li>
-    <li>Bạn xoá tài khoản lúc nào cũng được, và dữ liệu trên máy chủ bị xoá theo.</li>
-  </ol>
-  </div>
-  <h2>1. HUMAN ghi nhận những gì</h2>
-  <p>Toàn bộ dữ liệu dưới đây do <strong>bạn tự nhập hoặc tự bấm ghi nhận</strong> — trừ dữ liệu Health Connect, và phần đó cũng chỉ chạy sau khi chính bạn bật nó lên. HUMAN không đọc lén thứ gì trên máy bạn.</p>
-  <h3>Bạn cung cấp trong onboarding (mọi câu đều có thể bỏ qua)</h3>
-  <ul>
-    <li>Tên hoặc biệt danh</li>
-    <li>Nhóm tuổi</li>
-    <li>Nghề nghiệp và môi trường làm việc</li>
-    <li>Khung giờ làm việc thường ngày</li>
-    <li>Những điều bạn muốn cải thiện</li>
-  </ul>
-  <h3>Bạn ghi nhận trong lúc dùng</h3>
-  <ul>
-    <li>Hoạt động: nhóm (làm việc, học, vận động, nghỉ, người thân…), thời lượng, thời điểm</li>
-    <li>Phiên tập trung: lúc bắt đầu, lúc kết thúc, số lần rời khỏi ứng dụng</li>
-    <li>Mục tiêu và kỹ năng bạn chọn</li>
-    <li>Tâm trạng bạn tự khai (nếu bạn dùng tính năng này)</li>
-  </ul>
-  <h3>Health Connect — chỉ khi bạn tự bật</h3>
-  <div class="only-if">
-  <p>Tính năng này <strong>mặc định tắt</strong>. Bật rồi thì HUMAN đọc đúng hai thứ từ Health Connect trên máy bạn:</p>
-  <ul>
-    <li><strong>Số bước</strong> mỗi ngày</li>
-    <li><strong>Các buổi tập</strong>: lúc bắt đầu, lúc kết thúc, loại vận động</li>
-  </ul>
-  <p>HUMAN <strong>chỉ đọc</strong>, không bao giờ ghi ngược vào Health Connect, và <strong>không</strong> xin nhịp tim, giấc ngủ, cân nặng, huyết áp hay bất kỳ loại dữ liệu nào khác. Số liệu đọc về nằm lại trên máy bạn, chỉ dùng để hiện lại cho chính bạn — không dùng cho quảng cáo, không bán, không chuyển cho bên thứ ba.</p>
-  <p>Tắt đi thì HUMAN ngừng đọc ngay. Những gì đã ghi vào nhật ký của bạn vẫn ở lại, vì đó là ngày đã thật sự xảy ra của bạn; muốn xoá thì xoá toàn bộ dữ liệu ứng dụng (mục 6).</p>
-  </div>
-  <h3>HUMAN tự tạo ra từ dữ liệu trên</h3>
-  <ul>
-    <li>Ước lượng nhịp sinh hoạt của bạn: thời lượng tập trung trung bình, mức cân bằng giữa các nhóm</li>
-    <li>Các đề xuất và lời nhắc, cùng việc bạn chấp nhận hay bỏ qua chúng</li>
-  </ul>
-  <div class="never">
-  <h3>HUMAN <strong>không</strong> thu thập</h3>
-  <ul>
-    <li>Vị trí</li>
-    <li>Danh bạ, tin nhắn, cuộc gọi</li>
-    <li>Ảnh, camera, micro</li>
-    <li>Lịch sử duyệt web</li>
-    <li>Danh sách ứng dụng đã cài hay thời gian dùng ứng dụng khác</li>
-    <li>Định danh quảng cáo</li>
-    <li>Nhịp tim, giấc ngủ, cân nặng, huyết áp, hay bất kỳ dữ liệu sức khoẻ nào ngoài hai loại đã nêu ở trên</li>
-  </ul>
-  </div>
-  <h2>2. Dữ liệu nằm ở đâu</h2>
-  <p><strong>Chế độ khách (mặc định).</strong> Mọi thứ nằm trong bộ nhớ riêng của ứng dụng trên máy bạn. Không gửi đi đâu. Gỡ ứng dụng là mất, nên nếu muốn giữ thì hãy tạo tài khoản.</p>
-  <p><strong>Khi bạn tạo tài khoản.</strong> Dữ liệu được sao lưu lên máy chủ Supabase đặt tại Singapore (<code>ap-southeast-1</code>). Mỗi hàng dữ liệu gắn với tài khoản của bạn và được bảo vệ bằng Row Level Security ở tầng cơ sở dữ liệu — tài khoản khác không đọc được dữ liệu của bạn, kể cả khi họ cố gọi thẳng API.</p>
-  <p>Đường truyền được mã hoá bằng HTTPS.</p>
-  <h2>3. HUMAN dùng dữ liệu để làm gì</h2>
-  <p>Chỉ để chạy chính những tính năng bạn thấy:</p>
-  <ul>
-    <li>Hiểu nhịp sống của bạn để đưa ra đề xuất phù hợp hơn theo thời gian</li>
-    <li>Tổng kết ngày và nhận ra sự mất cân bằng</li>
-    <li>Sao lưu và đồng bộ giữa các máy của bạn</li>
-  </ul>
-  <div class="never">
-  <p>HUMAN <strong>không</strong> dùng dữ liệu để:</p>
-  <ul>
-    <li>Bán hoặc cho thuê cho bên thứ ba</li>
-    <li>Hiển thị quảng cáo hay xây dựng hồ sơ quảng cáo</li>
-    <li>Huấn luyện mô hình dùng chung cho người khác</li>
-    <li>So sánh, xếp hạng bạn với người dùng khác</li>
-  </ul>
-  </div>
-  <h2>3b. Phần "Nhìn lại tuần" (AI)</h2>
-  <div class="only-if">
-  <p>Tính năng này <strong>chỉ chạy khi bạn tự bấm</strong>. Không có gì tự động gửi đi.</p>
-  <p>Khi bạn bấm, HUMAN gửi một <strong>bản tóm tắt đã gộp và ẩn danh</strong> của 7 ngày gần nhất tới máy chủ của HUMAN, rồi từ đó tới một nhà cung cấp mô hình ngôn ngữ. Bản tóm tắt đó gồm đúng những thứ này:</p>
-  <ul>
-    <li>số ngày có dữ liệu trong tuần</li>
-    <li>số phút trung bình mỗi ngày theo nhóm (làm việc, học, vận động…)</li>
-    <li>số phiên tập trung và độ dài trung bình</li>
-    <li>điểm cân bằng trung bình</li>
-  </ul>
-  <p>Nó <strong>không</strong> gồm: tên bạn, email, ngày tháng cụ thể, ghi chú bạn viết, hay bất kỳ hoạt động riêng lẻ nào. Nhà cung cấp AI không biết bản tóm tắt đó là của ai.</p>
-  <p>Câu chữ AI viết ra được HUMAN kiểm duyệt trước khi hiển thị: câu có lời lẽ y tế, lời phán xét, hay tự đặt ra giới hạn sức khoẻ sẽ bị bỏ đi thay vì hiện cho bạn đọc. AI <strong>không</strong> quyết định bất kỳ ngưỡng nào trong ứng dụng — mọi gợi ý và nhắc nhở đều do quy tắc chạy trên máy bạn quyết định.</p>
-  <p>Không dùng tính năng này thì không có gì rời khỏi máy bạn vì lý do AI.</p>
-  </div>
-  <h2>4. Bên thứ ba</h2>
-  <div class="table-wrap">
-    <table>
-      <thead><tr>
-        <th>Dịch vụ</th>
-        <th>Vai trò</th>
-        <th>Dữ liệu nhận được</th>
-      </tr></thead>
-      <tbody>
-        <tr>
-          <td>Supabase</td>
-          <td>Lưu trữ và xác thực</td>
-          <td>Email, mật khẩu đã băm, và dữ liệu hoạt động của bạn — chỉ khi bạn tạo tài khoản</td>
-        </tr>
-        <tr>
-          <td>Nhà cung cấp mô hình ngôn ngữ</td>
-          <td>Viết phần "Nhìn lại tuần"</td>
-          <td>Bản tóm tắt tuần đã gộp và ẩn danh — chỉ khi bạn tự bấm. Xem mục 3b</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p>Không có SDK quảng cáo, không có SDK phân tích hành vi của bên thứ ba, không có trình theo dõi sự cố gửi dữ liệu ra ngoài.</p>
-  <h2>5. Giữ bao lâu</h2>
-  <ul>
-    <li><strong>Trên máy bạn</strong>: cho tới khi bạn xoá dữ liệu trong ứng dụng hoặc gỡ ứng dụng.</li>
-    <li><strong>Trên máy chủ</strong>: cho tới khi bạn xoá tài khoản. Xoá tài khoản thì mọi dữ liệu gắn với nó bị xoá theo, không giữ lại bản sao.</li>
-  </ul>
-  <p>Đăng xuất <strong>không</strong> xoá dữ liệu trên máy bạn — đăng xuất chỉ là ngừng đồng bộ.</p>
-  <h2>6. Quyền của bạn</h2>
-  <ul>
-    <li><strong>Xem</strong>: mọi thứ HUMAN biết về bạn đều hiện ngay trong ứng dụng. Không có dữ liệu ẩn nào.</li>
-    <li><strong>Xoá</strong>: xoá tài khoản trong phần Sao lưu &amp; thiết lập, hoặc gỡ ứng dụng để xoá dữ liệu cục bộ.</li>
-    <li><strong>Không đồng bộ</strong>: cứ dùng ở chế độ khách. Đây là trạng thái mặc định và hoàn toàn hợp lệ.</li>
-  </ul>
-  <h2>7. Trẻ em</h2>
-  <p>HUMAN <strong>không</strong> nhắm tới trẻ em dưới 13 tuổi và không cố ý thu thập dữ liệu của trẻ em.</p>
-  <h2>8. HUMAN không phải thiết bị y tế</h2>
-  <p>HUMAN ghi nhận vận động, nghỉ ngơi và nhịp sinh hoạt để giúp bạn nhìn rõ ngày của mình. Ứng dụng <strong>không chẩn đoán, không điều trị, không đưa lời khuyên y khoa</strong>, và không thay thế ý kiến của nhân viên y tế.</p>
-  <h2>9. Thay đổi chính sách</h2>
-  <p>Khi chính sách thay đổi theo hướng ảnh hưởng tới bạn, thông báo sẽ hiện trong ứng dụng trước khi thay đổi có hiệu lực. Ngày cập nhật luôn ghi ở đầu trang.</p>
-  <h2>10. Liên hệ</h2>
-  <p>Câu hỏi về quyền riêng tư: <strong><a href="mailto:mittohoa@gmail.com">mittohoa@gmail.com</a></strong></p>
+  <header class="hero">
+    <div>
+      <div class="brand">
+        <img src="shots/icon.png" alt="">
+        <b>HUMAN</b>
+      </div>
+
+      <h1>Biết lúc nào nên im lặng.</h1>
+
+      <p class="lede">
+        HUMAN nhìn nhịp sống thật của bạn rồi gợi ý <strong>một</strong> việc
+        tiếp theo. Và khi ngày đã đủ, nó nói thẳng: bạn xong rồi, đặt điện
+        thoại xuống.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="https://github.com/mittohoa/human-app/releases/latest/download/human-1.0.0.apk">
+          <b>Tải file APK</b>
+          <span>Android 8.0 trở lên · 58 MB</span>
+        </a>
+        <div class="btn btn-soon">
+          <b>Google Play</b>
+          <span>đang thử nội bộ</span>
+        </div>
+      </div>
+
+      <p class="note">
+        Bản APK là bản thử, ký bằng khoá riêng. Khi HUMAN lên Play, bạn sẽ phải
+        <strong>gỡ bản này</strong> trước khi cài bản từ Play — Android không
+        cho hai chữ ký khác nhau cập nhật đè lên nhau.
+      </p>
+    </div>
+
+    <figure class="hero-shot">
+      <img src="shots/01-next-action.png"
+           alt="Màn hình chính của HUMAN: khung cảnh có nhân vật đang đi bộ, bên dưới là một đề xuất duy nhất — Đi bộ 15 phút — kèm nút Bắt đầu và Để sau.">
+    </figure>
+  </header>
+
+  <section>
+    <h2>Bốn điều nó cố ý không làm</h2>
+    <p class="sub">
+      Không phải lời hứa trong phần mô tả — mỗi điều dưới đây có test canh trong
+      mã nguồn, và test sẽ gãy nếu ai đó đổi ý.
+    </p>
+
+    <div class="nots">
+      <div class="not">
+        <div class="x" aria-hidden="true">✕</div>
+        <p><strong>Không streak, không bảng xếp hạng.</strong> Không so sánh với bất kỳ ai. Mọi con số đều là so với chính mình.</p>
+      </div>
+      <div class="not">
+        <div class="x" aria-hidden="true">✕</div>
+        <p><strong>Không dùng thông báo để kéo bạn quay lại.</strong> Tối đa 4 mỗi ngày, và mặc định chỉ cho phép đúng một loại: nhắc nghỉ khi bạn đã tập trung quá lâu.</p>
+      </div>
+      <div class="not">
+        <div class="x" aria-hidden="true">✕</div>
+        <p><strong>Không biến “chưa biết” thành “bằng 0”.</strong> Nhóm chưa có dữ liệu hiện dấu <code>—</code>. HUMAN không nói bạn lười khi nó chỉ đơn giản là không biết.</p>
+      </div>
+      <div class="not">
+        <div class="x" aria-hidden="true">✕</div>
+        <p><strong>Không cần tài khoản.</strong> Mở lên là dùng. Dữ liệu nằm trên máy bạn cho tới khi chính bạn muốn sao lưu.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Bảy mặt của một ngày</h2>
+    <p class="sub">
+      Mọi việc bạn ghi nhận đều thuộc về một trong bảy nhóm. HUMAN không đo bạn
+      làm được bao nhiêu — nó nhìn xem có mặt nào đang bị bỏ quên.
+    </p>
+    <div class="pillars">
+      <span class="pill"><i class="dot" style="background:var(--work)"></i>Làm việc</span>
+      <span class="pill"><i class="dot" style="background:var(--learn)"></i>Học</span>
+      <span class="pill"><i class="dot" style="background:var(--move)"></i>Vận động</span>
+      <span class="pill"><i class="dot" style="background:var(--play)"></i>Giải trí</span>
+      <span class="pill"><i class="dot" style="background:var(--rest)"></i>Nghỉ</span>
+      <span class="pill"><i class="dot" style="background:var(--love)"></i>Người thân</span>
+      <span class="pill"><i class="dot" style="background:var(--give)"></i>Cộng đồng</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Nó trông như thế nào</h2>
+    <p class="sub">Ảnh chụp thật, không dựng.</p>
+    <div class="shots">
+      <figure>
+        <img src="shots/01-next-action.png" alt="Màn hình chính với một đề xuất duy nhất và nút Để sau.">
+        <figcaption><b>Một việc tiếp theo</b>Lý do đứng trước hành động. Không muốn thì bấm “Để sau”, và HUMAN thôi nhắc loại đó trong hôm nay.</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/02-focus.png" alt="Phiên tập trung đang chạy, kèm dòng chữ Đặt điện thoại xuống đi.">
+        <figcaption><b>Phiên tập trung</b>Dừng sớm không phải thất bại. Không đếm ngược giật gân, không âm thanh thúc giục.</figcaption>
+      </figure>
+      <figure>
+        <img src="shots/03-journey.png" alt="Màn hình Hành trình với EXP theo nhóm và danh sách thành tựu.">
+        <figcaption><b>Hành trình</b>Nằm sau một lối vào kín đáo, không đặt lên trang chủ. Thành tựu đến từ việc bạn thực sự làm.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Dữ liệu của bạn ở đâu</h2>
+    <p class="sub" style="margin-bottom: 18px;">
+      Mặc định: trên máy bạn, và không đi đâu cả. Tạo tài khoản là tuỳ chọn, chỉ
+      để sao lưu và đồng bộ giữa các máy của chính bạn. HUMAN không bán dữ liệu,
+      không có quảng cáo, và không xin quyền vị trí, danh bạ, camera hay micro.
+    </p>
+    <p class="note" style="margin: 0;">
+      <a href="privacy/">Đọc chính sách quyền riêng tư đầy đủ →</a>
+    </p>
+  </section>
 
   <footer>
-    <p>Ứng dụng HUMAN · <code>com.humanapp.human</code></p>
+    <span>HUMAN · <code>com.humanapp.human</code></span>
+    <a href="privacy/">Quyền riêng tư</a>
+    <a href="mailto:mittohoa@gmail.com">mittohoa@gmail.com</a>
   </footer>
 
-</main>
+</div>
 
 </body>
 </html>

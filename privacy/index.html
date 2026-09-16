@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chính sách quyền riêng tư — HUMAN</title>
+<meta name="description" content="Chính sách quyền riêng tư của ứng dụng HUMAN. HUMAN chạy đầy đủ mà không cần tài khoản; dữ liệu chỉ rời khỏi máy bạn khi bạn chủ động tạo tài khoản.">
+<meta name="color-scheme" content="light dark">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+
+<style>
+  /* SINH TỰ ĐỘNG từ docs/PRIVACY.md — đừng sửa tay file này.
+     Sửa nội dung ở file gốc rồi chạy: python tool/build_privacy_page.py
+     Bảng màu lấy từ lib/core/theme/human_palette.dart của chính ứng dụng. */
+  :root {
+    --ground: #FBF8F3;
+    --surface: #F5F0E8;
+    --line: #EAE2D6;
+    --text: #1C1A17;
+    --text-2: #433E38;
+    --muted: #6E675E;
+    --accent: #4A6FA5;
+    --move: #5C8C5A;
+    --danger: #B0534A;
+    --body: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #15161A;
+      --surface: #1D1F24;
+      --line: #2E323A;
+      --text: #F2EDE4;
+      --text-2: #C6C2BC;
+      --muted: #8D8A85;
+      --accent: #7E9DCB;
+      --move: #88B385;
+      --danger: #D48178;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .stripe { display: grid; grid-template-columns: repeat(7, 1fr); height: 3px; }
+  .stripe span { display: block; }
+
+  main {
+    max-width: 44rem;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 40px);
+    padding-block: clamp(32px, 7vw, 64px) 64px;
+  }
+
+  h1 {
+    font-size: clamp(1.7rem, 5.5vw, 2.3rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+
+  .updated { color: var(--muted); font-size: 0.9rem; margin: 0 0 36px; }
+
+  h2 {
+    font-size: clamp(1.15rem, 3.6vw, 1.35rem);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    margin: 44px 0 12px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    text-wrap: balance;
+  }
+
+  h3 { font-size: 1rem; font-weight: 600; margin: 26px 0 8px; color: var(--text); }
+
+  p { margin: 0 0 14px; color: var(--text-2); }
+  ul, ol { margin: 0 0 14px; padding-left: 1.3em; color: var(--text-2); }
+  li { margin-bottom: 6px; }
+  strong { color: var(--text); font-weight: 600; }
+  code {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 0.9em;
+    color: var(--text);
+  }
+
+  /* Tóm tắt — thứ người dùng đọc khi bấm link từ màn hình xin quyền. */
+  .summary {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: clamp(18px, 4vw, 26px);
+    margin: 0 0 8px;
+  }
+  .summary > :last-child { margin-bottom: 0; }
+  .summary li:last-child { margin-bottom: 0; }
+
+  .never { border-left: 3px solid var(--danger); padding-left: 16px; margin: 18px 0; }
+  .only-if { border-left: 3px solid var(--move); padding-left: 16px; margin: 18px 0; }
+  .never > :last-child, .only-if > :last-child { margin-bottom: 0; }
+
+  .table-wrap { overflow-x: auto; margin: 0 0 16px; }
+  table { border-collapse: collapse; width: 100%; min-width: 30rem; font-size: 0.93rem; }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 10px 14px 10px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--text-2);
+  }
+  th { color: var(--text); font-weight: 600; white-space: nowrap; }
+
+  footer {
+    margin-top: 52px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+  footer p { color: var(--muted); }
+
+  a { color: var(--accent); }
+  a:focus-visible, :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<div class="stripe" aria-hidden="true">
+  <span style="background:#4A6FA5"></span>
+  <span style="background:#C08A2E"></span>
+  <span style="background:#5C8C5A"></span>
+  <span style="background:#D4795B"></span>
+  <span style="background:#7C7BA8"></span>
+  <span style="background:#B8657A"></span>
+  <span style="background:#4E938F"></span>
+</div>
+
+<main>
+
+  <h1>Chính sách quyền riêng tư — HUMAN</h1>
+  <p class="updated">Cập nhật lần cuối: 16/09/2026</p>
+  <h2>Tóm tắt trong năm dòng</h2>
+  <div class="summary">
+  <ol>
+    <li>HUMAN chạy được đầy đủ <strong>mà không cần tài khoản</strong>. Khi đó dữ liệu chỉ nằm trên máy bạn và không đi đâu cả.</li>
+    <li>Chỉ khi bạn <strong>chủ động tạo tài khoản</strong>, dữ liệu mới được sao lưu lên máy chủ để đồng bộ giữa các thiết bị của chính bạn.</li>
+    <li>HUMAN <strong>không bán</strong> dữ liệu, <strong>không chia sẻ</strong> cho bên quảng cáo, và không có quảng cáo trong ứng dụng.</li>
+    <li>HUMAN <strong>không</strong> xin quyền vị trí, danh bạ, camera, micro hay lịch sử duyệt web.</li>
+    <li>Bạn xoá tài khoản lúc nào cũng được, và dữ liệu trên máy chủ bị xoá theo.</li>
+  </ol>
+  </div>
+  <h2>1. HUMAN ghi nhận những gì</h2>
+  <p>Toàn bộ dữ liệu dưới đây do <strong>bạn tự nhập hoặc tự bấm ghi nhận</strong> — trừ dữ liệu Health Connect, và phần đó cũng chỉ chạy sau khi chính bạn bật nó lên. HUMAN không đọc lén thứ gì trên máy bạn.</p>
+  <h3>Bạn cung cấp trong onboarding (mọi câu đều có thể bỏ qua)</h3>
+  <ul>
+    <li>Tên hoặc biệt danh</li>
+    <li>Nhóm tuổi</li>
+    <li>Nghề nghiệp và môi trường làm việc</li>
+    <li>Khung giờ làm việc thường ngày</li>
+    <li>Những điều bạn muốn cải thiện</li>
+  </ul>
+  <h3>Bạn ghi nhận trong lúc dùng</h3>
+  <ul>
+    <li>Hoạt động: nhóm (làm việc, học, vận động, nghỉ, người thân…), thời lượng, thời điểm</li>
+    <li>Phiên tập trung: lúc bắt đầu, lúc kết thúc, số lần rời khỏi ứng dụng</li>
+    <li>Mục tiêu và kỹ năng bạn chọn</li>
+    <li>Tâm trạng bạn tự khai (nếu bạn dùng tính năng này)</li>
+  </ul>
+  <h3>Health Connect — chỉ khi bạn tự bật</h3>
+  <div class="only-if">
+  <p>Tính năng này <strong>mặc định tắt</strong>. Bật rồi thì HUMAN đọc đúng hai thứ từ Health Connect trên máy bạn:</p>
+  <ul>
+    <li><strong>Số bước</strong> mỗi ngày</li>
+    <li><strong>Các buổi tập</strong>: lúc bắt đầu, lúc kết thúc, loại vận động</li>
+  </ul>
+  <p>HUMAN <strong>chỉ đọc</strong>, không bao giờ ghi ngược vào Health Connect, và <strong>không</strong> xin nhịp tim, giấc ngủ, cân nặng, huyết áp hay bất kỳ loại dữ liệu nào khác. Số liệu đọc về nằm lại trên máy bạn, chỉ dùng để hiện lại cho chính bạn — không dùng cho quảng cáo, không bán, không chuyển cho bên thứ ba.</p>
+  <p>Tắt đi thì HUMAN ngừng đọc ngay. Những gì đã ghi vào nhật ký của bạn vẫn ở lại, vì đó là ngày đã thật sự xảy ra của bạn; muốn xoá thì xoá toàn bộ dữ liệu ứng dụng (mục 6).</p>
+  </div>
+  <h3>HUMAN tự tạo ra từ dữ liệu trên</h3>
+  <ul>
+    <li>Ước lượng nhịp sinh hoạt của bạn: thời lượng tập trung trung bình, mức cân bằng giữa các nhóm</li>
+    <li>Các đề xuất và lời nhắc, cùng việc bạn chấp nhận hay bỏ qua chúng</li>
+  </ul>
+  <div class="never">
+  <h3>HUMAN <strong>không</strong> thu thập</h3>
+  <ul>
+    <li>Vị trí</li>
+    <li>Danh bạ, tin nhắn, cuộc gọi</li>
+    <li>Ảnh, camera, micro</li>
+    <li>Lịch sử duyệt web</li>
+    <li>Danh sách ứng dụng đã cài hay thời gian dùng ứng dụng khác</li>
+    <li>Định danh quảng cáo</li>
+    <li>Nhịp tim, giấc ngủ, cân nặng, huyết áp, hay bất kỳ dữ liệu sức khoẻ nào ngoài hai loại đã nêu ở trên</li>
+  </ul>
+  </div>
+  <h2>2. Dữ liệu nằm ở đâu</h2>
+  <p><strong>Chế độ khách (mặc định).</strong> Mọi thứ nằm trong bộ nhớ riêng của ứng dụng trên máy bạn. Không gửi đi đâu. Gỡ ứng dụng là mất, nên nếu muốn giữ thì hãy tạo tài khoản.</p>
+  <p><strong>Khi bạn tạo tài khoản.</strong> Dữ liệu được sao lưu lên máy chủ Supabase đặt tại Singapore (<code>ap-southeast-1</code>). Mỗi hàng dữ liệu gắn với tài khoản của bạn và được bảo vệ bằng Row Level Security ở tầng cơ sở dữ liệu — tài khoản khác không đọc được dữ liệu của bạn, kể cả khi họ cố gọi thẳng API.</p>
+  <p>Đường truyền được mã hoá bằng HTTPS.</p>
+  <h2>3. HUMAN dùng dữ liệu để làm gì</h2>
+  <p>Chỉ để chạy chính những tính năng bạn thấy:</p>
+  <ul>
+    <li>Hiểu nhịp sống của bạn để đưa ra đề xuất phù hợp hơn theo thời gian</li>
+    <li>Tổng kết ngày và nhận ra sự mất cân bằng</li>
+    <li>Sao lưu và đồng bộ giữa các máy của bạn</li>
+  </ul>
+  <div class="never">
+  <p>HUMAN <strong>không</strong> dùng dữ liệu để:</p>
+  <ul>
+    <li>Bán hoặc cho thuê cho bên thứ ba</li>
+    <li>Hiển thị quảng cáo hay xây dựng hồ sơ quảng cáo</li>
+    <li>Huấn luyện mô hình dùng chung cho người khác</li>
+    <li>So sánh, xếp hạng bạn với người dùng khác</li>
+  </ul>
+  </div>
+  <h2>3b. Phần "Nhìn lại tuần" (AI)</h2>
+  <div class="only-if">
+  <p>Tính năng này <strong>chỉ chạy khi bạn tự bấm</strong>. Không có gì tự động gửi đi.</p>
+  <p>Khi bạn bấm, HUMAN gửi một <strong>bản tóm tắt đã gộp và ẩn danh</strong> của 7 ngày gần nhất tới máy chủ của HUMAN, rồi từ đó tới một nhà cung cấp mô hình ngôn ngữ. Bản tóm tắt đó gồm đúng những thứ này:</p>
+  <ul>
+    <li>số ngày có dữ liệu trong tuần</li>
+    <li>số phút trung bình mỗi ngày theo nhóm (làm việc, học, vận động…)</li>
+    <li>số phiên tập trung và độ dài trung bình</li>
+    <li>điểm cân bằng trung bình</li>
+  </ul>
+  <p>Nó <strong>không</strong> gồm: tên bạn, email, ngày tháng cụ thể, ghi chú bạn viết, hay bất kỳ hoạt động riêng lẻ nào. Nhà cung cấp AI không biết bản tóm tắt đó là của ai.</p>
+  <p>Câu chữ AI viết ra được HUMAN kiểm duyệt trước khi hiển thị: câu có lời lẽ y tế, lời phán xét, hay tự đặt ra giới hạn sức khoẻ sẽ bị bỏ đi thay vì hiện cho bạn đọc. AI <strong>không</strong> quyết định bất kỳ ngưỡng nào trong ứng dụng — mọi gợi ý và nhắc nhở đều do quy tắc chạy trên máy bạn quyết định.</p>
+  <p>Không dùng tính năng này thì không có gì rời khỏi máy bạn vì lý do AI.</p>
+  </div>
+  <h2>4. Bên thứ ba</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Dịch vụ</th>
+        <th>Vai trò</th>
+        <th>Dữ liệu nhận được</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>Supabase</td>
+          <td>Lưu trữ và xác thực</td>
+          <td>Email, mật khẩu đã băm, và dữ liệu hoạt động của bạn — chỉ khi bạn tạo tài khoản</td>
+        </tr>
+        <tr>
+          <td>Nhà cung cấp mô hình ngôn ngữ</td>
+          <td>Viết phần "Nhìn lại tuần"</td>
+          <td>Bản tóm tắt tuần đã gộp và ẩn danh — chỉ khi bạn tự bấm. Xem mục 3b</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Không có SDK quảng cáo, không có SDK phân tích hành vi của bên thứ ba, không có trình theo dõi sự cố gửi dữ liệu ra ngoài.</p>
+  <h2>5. Giữ bao lâu</h2>
+  <ul>
+    <li><strong>Trên máy bạn</strong>: cho tới khi bạn xoá dữ liệu trong ứng dụng hoặc gỡ ứng dụng.</li>
+    <li><strong>Trên máy chủ</strong>: cho tới khi bạn xoá tài khoản. Xoá tài khoản thì mọi dữ liệu gắn với nó bị xoá theo, không giữ lại bản sao.</li>
+  </ul>
+  <p>Đăng xuất <strong>không</strong> xoá dữ liệu trên máy bạn — đăng xuất chỉ là ngừng đồng bộ.</p>
+  <h2>6. Quyền của bạn</h2>
+  <ul>
+    <li><strong>Xem</strong>: mọi thứ HUMAN biết về bạn đều hiện ngay trong ứng dụng. Không có dữ liệu ẩn nào.</li>
+    <li><strong>Xoá</strong>: xoá tài khoản trong phần Sao lưu &amp; thiết lập, hoặc gỡ ứng dụng để xoá dữ liệu cục bộ.</li>
+    <li><strong>Không đồng bộ</strong>: cứ dùng ở chế độ khách. Đây là trạng thái mặc định và hoàn toàn hợp lệ.</li>
+  </ul>
+  <h2>7. Trẻ em</h2>
+  <p>HUMAN <strong>không</strong> nhắm tới trẻ em dưới 13 tuổi và không cố ý thu thập dữ liệu của trẻ em.</p>
+  <h2>8. HUMAN không phải thiết bị y tế</h2>
+  <p>HUMAN ghi nhận vận động, nghỉ ngơi và nhịp sinh hoạt để giúp bạn nhìn rõ ngày của mình. Ứng dụng <strong>không chẩn đoán, không điều trị, không đưa lời khuyên y khoa</strong>, và không thay thế ý kiến của nhân viên y tế.</p>
+  <h2>9. Thay đổi chính sách</h2>
+  <p>Khi chính sách thay đổi theo hướng ảnh hưởng tới bạn, thông báo sẽ hiện trong ứng dụng trước khi thay đổi có hiệu lực. Ngày cập nhật luôn ghi ở đầu trang.</p>
+  <h2>10. Liên hệ</h2>
+  <p>Câu hỏi về quyền riêng tư: <strong><a href="mailto:mittohoa@gmail.com">mittohoa@gmail.com</a></strong></p>
+
+  <footer>
+    <p>Ứng dụng HUMAN · <code>com.humanapp.human</code></p>
+  </footer>
+
+</main>
+
+</body>
+</html>
