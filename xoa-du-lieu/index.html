@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Xoá tài khoản và dữ liệu — HUMAN</title>
+<meta name="description" content="Cách xoá tài khoản HUMAN và toàn bộ dữ liệu. Xoá được ngay trong ứng dụng, hoặc gửi yêu cầu qua email nếu bạn không còn cài ứng dụng.">
+<meta name="color-scheme" content="light dark">
+
+<link rel="icon" href="../shots/icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+
+<style>
+  /* Bảng màu lấy từ lib/core/theme/human_palette.dart của chính ứng dụng. */
+  :root {
+    --ground: #FBF8F3;
+    --surface: #F5F0E8;
+    --line: #EAE2D6;
+    --text: #1C1A17;
+    --text-2: #433E38;
+    --muted: #6E675E;
+    --accent: #4A6FA5;
+    --move: #5C8C5A;
+    --danger: #B0534A;
+    --body: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #15161A;
+      --surface: #1D1F24;
+      --line: #2E323A;
+      --text: #F2EDE4;
+      --text-2: #C6C2BC;
+      --muted: #8D8A85;
+      --accent: #7E9DCB;
+      --move: #88B385;
+      --danger: #D48178;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .stripe { display: grid; grid-template-columns: repeat(7, 1fr); height: 3px; }
+  .stripe span { display: block; }
+
+  main {
+    max-width: 44rem;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 40px);
+    padding-block: clamp(32px, 7vw, 64px) 64px;
+  }
+
+  h1 {
+    font-size: clamp(1.7rem, 5.5vw, 2.2rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+
+  .app { color: var(--muted); font-size: 0.9rem; margin: 0 0 36px; }
+
+  h2 {
+    font-size: clamp(1.1rem, 3.4vw, 1.3rem);
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 42px 0 12px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+    text-wrap: balance;
+  }
+
+  p { margin: 0 0 14px; color: var(--text-2); }
+  ul, ol { margin: 0 0 14px; padding-left: 1.3em; color: var(--text-2); }
+  li { margin-bottom: 8px; }
+  strong { color: var(--text); font-weight: 600; }
+
+  code {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 0.9em;
+    color: var(--text);
+  }
+
+  .steps {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: clamp(18px, 4vw, 26px);
+    margin: 0 0 18px;
+  }
+  .steps > :last-child { margin-bottom: 0; }
+  .steps ol { margin-bottom: 0; }
+
+  .keeps { border-left: 3px solid var(--move); padding-left: 16px; margin: 18px 0; }
+  .gone { border-left: 3px solid var(--danger); padding-left: 16px; margin: 18px 0; }
+  .keeps > :last-child, .gone > :last-child { margin-bottom: 0; }
+
+  .table-wrap { overflow-x: auto; margin: 0 0 16px; }
+  table { border-collapse: collapse; width: 100%; min-width: 28rem; font-size: 0.93rem; }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 10px 14px 10px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--text-2);
+  }
+  th { color: var(--text); font-weight: 600; white-space: nowrap; }
+
+  footer {
+    margin-top: 50px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.88rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+
+  a { color: var(--accent); }
+  a:focus-visible, :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<div class="stripe" aria-hidden="true">
+  <span style="background:#4A6FA5"></span>
+  <span style="background:#C08A2E"></span>
+  <span style="background:#5C8C5A"></span>
+  <span style="background:#D4795B"></span>
+  <span style="background:#7C7BA8"></span>
+  <span style="background:#B8657A"></span>
+  <span style="background:#4E938F"></span>
+</div>
+
+<main>
+
+  <h1>Xoá tài khoản và dữ liệu</h1>
+  <p class="app">Ứng dụng HUMAN · <code>com.humanapp.human</code></p>
+
+  <p>
+    Bạn xoá được bất cứ lúc nào, không cần hỏi ai và không cần giải thích lý do.
+    Có hai cách, tuỳ vào việc bạn còn cài ứng dụng hay không.
+  </p>
+
+  <h2>Cách 1 — Trong ứng dụng</h2>
+
+  <div class="steps">
+    <ol>
+      <li>Mở HUMAN</li>
+      <li>Ở màn hình chính, chạm <strong>Sao lưu &amp; thiết lập</strong> (góc dưới bên phải)</li>
+      <li>Kéo xuống cuối, tới mục <strong>Xoá dữ liệu</strong></li>
+      <li>Chọn <strong>Xoá tài khoản</strong> — hoặc <strong>Xoá toàn bộ dữ liệu trên máy này</strong></li>
+      <li>Xác nhận một lần nữa</li>
+    </ol>
+  </div>
+
+  <p>Xoá xong là xong ngay, không phải chờ duyệt.</p>
+
+  <h2>Cách 2 — Gửi yêu cầu qua email</h2>
+
+  <p>
+    Nếu bạn đã gỡ ứng dụng hoặc không đăng nhập được, gửi thư tới
+    <a href="mailto:mittohoa@gmail.com?subject=Xo%C3%A1%20t%C3%A0i%20kho%E1%BA%A3n%20HUMAN">mittohoa@gmail.com</a>
+    với tiêu đề <strong>“Xoá tài khoản HUMAN”</strong>, kèm địa chỉ email bạn đã
+    dùng để tạo tài khoản.
+  </p>
+  <p>
+    Yêu cầu được xử lý trong <strong>30 ngày</strong>, thường là sớm hơn nhiều.
+    Thư phải gửi từ chính địa chỉ email của tài khoản — đó là cách duy nhất để
+    biết chắc người yêu cầu là chủ tài khoản.
+  </p>
+
+  <h2>Xoá thì mất gì</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Việc bạn chọn</th><th>Xoá gì</th><th>Giữ lại gì</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Xoá tài khoản</strong></td>
+          <td>Tài khoản và toàn bộ dữ liệu đã sao lưu trên máy chủ</td>
+          <td>Dữ liệu trên máy bạn vẫn còn</td>
+        </tr>
+        <tr>
+          <td><strong>Xoá dữ liệu trên máy</strong></td>
+          <td>Mọi hoạt động, phiên tập trung, mục tiêu, thành tựu, thiết lập</td>
+          <td>Tài khoản trên máy chủ vẫn còn, nếu bạn có</td>
+        </tr>
+        <tr>
+          <td><strong>Gỡ ứng dụng</strong></td>
+          <td>Toàn bộ dữ liệu trên máy</td>
+          <td>Tài khoản trên máy chủ vẫn còn, nếu bạn có</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="gone">
+    <p>
+      <strong>Xoá tài khoản là vĩnh viễn.</strong> HUMAN không giữ bản sao nào
+      sau khi xoá, kể cả bản sao lưu nội bộ. Không khôi phục lại được, và cũng
+      không có “thùng rác” nào để lấy lại.
+    </p>
+  </div>
+
+  <div class="keeps">
+    <p>
+      <strong>Đăng xuất không phải là xoá.</strong> Đăng xuất chỉ ngừng đồng bộ;
+      dữ liệu trên máy và trên máy chủ đều còn nguyên.
+    </p>
+  </div>
+
+  <h2>Muốn xoá mà chưa từng tạo tài khoản?</h2>
+
+  <p>
+    Thì không có gì để xoá trên máy chủ. HUMAN dùng được đầy đủ mà không cần tài
+    khoản, và ở chế độ đó dữ liệu chưa bao giờ rời khỏi máy bạn. Gỡ ứng dụng là
+    hết.
+  </p>
+
+  <footer>
+    <a href="../">Trang giới thiệu</a>
+    <a href="../privacy/">Chính sách quyền riêng tư</a>
+    <a href="mailto:mittohoa@gmail.com">mittohoa@gmail.com</a>
+  </footer>
+
+</main>
+
+</body>
+</html>
